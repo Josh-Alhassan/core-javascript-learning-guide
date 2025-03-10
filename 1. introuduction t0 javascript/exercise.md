@@ -1,113 +1,217 @@
-## Exercises and Their Solutions
-
-### 1. Variable Declaration Exercise
-
-- **Objective**: Practice declaring variables using `var`, `let`, and `const`.
-- **Task**: Create a JavaScript file and declare three variables for your name, age, and favorite color using each of the three keywords. Log them to the console.
-
-  ```javascript
-  var name = "John";
-  let age = 28;
-  const favoriteColor = "blue";
-
-  console.log(name, age, favoriteColor);
-  ```
-
-### 2. Data Type Identification
-
-- **Objective**: Understand different data types in JavaScript.
-- **Task**: Create a function that takes a variable as an argument and returns its data type using `typeof`. Test the function with different types of values (string, number, boolean, object).
-
-  ```javascript
-  function checkDataType(value) {
-    return typeof value;
-  }
-
-  console.log(checkDataType("Hello")); // string
-  console.log(checkDataType(42)); // number
-  console.log(checkDataType(true)); // boolean
-  console.log(checkDataType({})); // object
-  ```
+# Introduction to JavaScript
 
 ## Mini Projects
 
-### 1. Personal Profile Card
+### 1. **Temperature Converter**
 
-- **Objective**: Create a simple profile card using JavaScript to display personal information.
-- **Task**: Use HTML and CSS to create a basic layout. Use JavaScript to store your name, age, and hobbies in variables and dynamically display them on the webpage.
-
-  ```html
-  const name = "John Doe"; const age = 28; const hobbies = ["reading", "gaming",
-  "coding"]; document.getElementById("name").textContent = name;
-  document.getElementById("age").textContent = `Age: ${age}`;
-  document.getElementById("hobbies").textContent = `Hobbies: ${hobbies.join(",
-  ")}`;
-  ```
-
-### 2. Simple Quiz Application
-
-- **Objective**: Build a basic quiz application that uses variables to store questions and answers.
-- **Task**: Create an array of questions and answers. Use a loop to display each question and prompt the user for an answer. Keep track of the score based on correct answers.
+- **Objective**: Create a program that converts temperatures between Celsius and Fahrenheit.
+- **Task**:
+  - Use variables to store the temperature and the conversion formula.
+  - Allow the user to input a temperature in Celsius or Fahrenheit and convert it to the other unit.
 
 ```javascript
-const questions = [
-  { question: "What is the capital of France?", answer: "Paris" },
-  { question: "What is 2 + 2?", answer: "4" },
-  { question: "What is the color of the sky?", answer: "blue" },
-];
-
-let score = 0;
-
-questions.forEach((q) => {
-  const userAnswer = prompt(q.question);
-  if (userAnswer.toLowerCase() === q.answer.toLowerCase()) {
-    score++;
-    alert("Correct!");
+function convertTemperature(temp, unit) {
+  if (unit === "C") {
+    return (temp * 9) / 5 + 32; // Convert Celsius to Fahrenheit
+  } else if (unit === "F") {
+    return ((temp - 32) * 5) / 9; // Convert Fahrenheit to Celsius
   } else {
-    alert(`Wrong! The correct answer is ${q.answer}.`);
+    return "Invalid unit. Use 'C' for Celsius or 'F' for Fahrenheit.";
   }
-});
+}
 
-alert(`Your score is ${score} out of ${questions.length}.`);
+const temperature = 30; // Example: Replace with any number
+const unit = "C"; // Replace with "C" for Celsius or "F" for Fahrenheit
+const result = convertTemperature(temperature, unit);
+console.log(`Converted Temperature: ${result}`);
 ```
 
-## Stretched Projects
+---
 
-### 1. To-Do List Application
+### 2. **Simple Calculator**
 
-- **Objective**: Create a functional to-do list application using JavaScript.
+- **Objective**: Build a calculator program that performs basic arithmetic operations.
 - **Task**:
-  - Use HTML/CSS for layout and styling.
-  - Allow users to add tasks, mark them as completed, and remove them.
-  - Store tasks in an array and update the displayed list dynamically using JavaScript.
+  - Use variables to store two numbers and an operator (`+`, `-`, `*`, `/`).
+  - Perform the operation based on the operator provided.
 
-```html
-Add Task const tasks = []; document.getElementById("addTaskButton").onclick =
-function() { const taskInput = document.getElementById("taskInput"); const
-taskText = taskInput.value; if (taskText) { tasks.push(taskText);
-taskInput.value = ""; // Clear input field renderTasks(); } }; function
-renderTasks() { const taskList = document.getElementById("taskList");
-taskList.innerHTML = ""; // Clear existing tasks tasks.forEach((task, index) =>
-{ const li = document.createElement("li"); li.textContent = task; li.onclick =
-function() { tasks.splice(index, 1); // Remove task on click renderTasks(); };
-taskList.appendChild(li); }); }
+```javascript
+function calculator(num1, num2, operator) {
+  if (operator === "+") {
+    return num1 + num2;
+  } else if (operator === "-") {
+    return num1 - num2;
+  } else if (operator === "*") {
+    return num1 * num2;
+  } else if (operator === "/") {
+    return num1 / num2;
+  } else {
+    return "Invalid operator. Use '+', '-', '*', or '/'.";
+  }
+}
+
+const number1 = 10; // Replace with any number
+const number2 = 5; // Replace with any number
+const operation = "+"; // Replace with '+', '-', '*', or '/'
+const result = calculator(number1, number2, operation);
+console.log(`Result: ${result}`);
 ```
 
-### 2. Weather App (Using API)
+---
 
-- **Objective**: Build a weather application that fetches data from a weather API.
+### 3. **Random Number Guessing Game**
+
+- **Objective**: Create a simple game where the computer generates a random number, and the user has to guess it.
 - **Task**:
-  - Use HTML/CSS for layout.
-  - Use JavaScript to fetch weather data based on user input (city name).
-  - Display temperature, weather conditions, etc., dynamically on the webpage.
+  - Use variables to store the random number and the user's guess.
+  - Provide feedback on whether the guess is too high, too low, or correct.
 
-```html
-Get Weather document.getElementById("getWeatherButton").onclick = async
-function() { const cityName = document.getElementById("cityInput").value; const
-apiKey = 'YOUR_API_KEY'; // Replace with your API key const response = await
-fetch(`https://api.openweathermap.org/data/2.5/weather?q=${cityName}&appid=${apiKey}&units=metric`);
-if (response.ok) { const data = await response.json();
-document.getElementById("weatherResult").innerHTML = `Temperature in
-${data.name}: ${data.main.temp}°CWeather: ${data.weather[0].description}`; }
-else { alert('City not found!'); } };
+```javascript
+function guessingGame() {
+    const randomNumber = Math.floor(Math.random() * 100) + 1; // Random number between 1 and 100
+    let guess;
+    let attempts = 0;
+
+    while (guess !== randomNumber) {
+        guess = parseInt(prompt("Guess a number between 1 and 100:"));
+        attempts++;
+
+        if (guess > randomNumber) {
+            console.log("Too high! Try again.");
+        } else if (guess  balance) {
+        console.log("Insufficient funds!");
+    } else {
+        balance -= amount;
+        console.log(`You withdrew $${amount}. New balance: $${balance}`);
+    }
+}
+
+function checkBalance() {
+    console.log(`Your current balance is $${balance}`);
+}
+
+// Example usage:
+deposit(500);       // Deposit $500
+withdraw(300);      // Withdraw $300
+checkBalance();     // Check current balance
+```
+
+---
+
+### 2. **Rock-Paper-Scissors Game**
+
+- **Objective**: Create a Rock-Paper-Scissors game where the user plays against the computer.
+- **Task**:
+  - Use variables to store choices for both the user and computer.
+  - Determine the winner based on standard Rock-Paper-Scissors rules.
+
+```javascript
+function playRockPaperScissors(userChoice) {
+  const choices = ["rock", "paper", "scissors"];
+  const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+  console.log(`You chose: ${userChoice}`);
+  console.log(`Computer chose: ${computerChoice}`);
+
+  if (userChoice === computerChoice) {
+    console.log("It's a tie!");
+  } else if (
+    (userChoice === "rock" && computerChoice === "scissors") ||
+    (userChoice === "paper" && computerChoice === "rock") ||
+    (userChoice === "scissors" && computerChoice === "paper")
+  ) {
+    console.log("You win!");
+  } else {
+    console.log("You lose!");
+  }
+}
+
+// Example usage:
+playRockPaperScissors("rock"); // Replace with "rock", "paper", or "scissors"
+```
+
+---
+
+### 3. **Shopping Cart System**
+
+- **Objective**: Simulate a simple shopping cart system where users can add items, remove items, and view their cart.
+- **Task**:
+  - Use an array to store items in the cart.
+  - Implement functions for adding items, removing items, and displaying all items in the cart.
+
+```javascript
+let shoppingCart = [];
+
+function addItem(item) {
+  shoppingCart.push(item);
+  console.log(`${item} added to your cart.`);
+}
+
+function removeItem(item) {
+  const index = shoppingCart.indexOf(item);
+
+  if (index > -1) {
+    shoppingCart.splice(index, 1);
+    console.log(`${item} removed from your cart.`);
+  } else {
+    console.log(`${item} is not in your cart.`);
+  }
+}
+
+function viewCart() {
+  if (shoppingCart.length > 0) {
+    console.log("Your shopping cart contains:");
+    shoppingCart.forEach((item, index) => console.log(`${index + 1}. ${item}`));
+  } else {
+    console.log("Your shopping cart is empty.");
+  }
+}
+
+// Example usage:
+addItem("Apple");
+addItem("Banana");
+viewCart();
+removeItem("Apple");
+viewCart();
+```
+
+---
+
+### 4. **Simple Budget Tracker**
+
+- **Objective**: Build a program that tracks expenses and calculates remaining budget.
+- **Task**:
+  - Use variables to store total budget and expenses.
+  - Add functionality to track expenses and calculate remaining budget.
+
+```javascript
+let totalBudget = 1000; // Starting budget
+let expenses = [];
+
+function addExpense(description, amount) {
+  expenses.push({ description, amount });
+  totalBudget -= amount;
+
+  console.log(
+    `Added expense: ${description} ($${amount}). Remaining budget: $${totalBudget}`
+  );
+}
+
+function viewExpenses() {
+  console.log("Your expenses:");
+
+  expenses.forEach((expense, index) =>
+    console.log(`${index + 1}. ${expense.description}: $${expense.amount}`)
+  );
+}
+
+function checkRemainingBudget() {
+  console.log(`Remaining budget: $${totalBudget}`);
+}
+
+// Example usage:
+addExpense("Groceries", 200);
+addExpense("Rent", 500);
+viewExpenses();
+checkRemainingBudget();
 ```
