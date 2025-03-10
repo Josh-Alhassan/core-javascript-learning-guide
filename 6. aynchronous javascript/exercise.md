@@ -226,10 +226,8 @@ fetchWithCache("https://jsonplaceholder.typicode.com/posts/1").then(() =>
 
 ---
 
-## **How to Use These**
+## **How to Run These Exercises**
 
 1. Run code in a Node.js environment or browser console.
 2. For modular projects, use ES6 modules with `import/export`.
 3. Replace API URLs with real endpoints for testing.
-
-These exercises will help you master async workflows, modular code, and even simulate version control concepts in pure JavaScript! 🚀
