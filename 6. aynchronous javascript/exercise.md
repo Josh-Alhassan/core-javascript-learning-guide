@@ -1,16 +1,4 @@
-<img src="https://r2cdn.perplexity.ai/pplx-full-logo-primary-dark%402x.png" class="logo" width="120"/>
-
-# 
-
----
-
-# Generate exercises, mini projects, and stretched projects based on this topic.
-
-The project/strectched projects should ONLY be based on JavaScript. No HTML or CSS
-
-Here are exercises, mini-projects, and stretched projects focused on **asynchronous JavaScript, XHRs, Promises, Fetch API, simulated version control, and modular JavaScript** – all using pure JavaScript (no HTML/CSS).
-
----
+# Asynchronous JavaScript & Related Concepts: A Beginner-Friendly Guide
 
 ## **Exercises**
 
@@ -34,7 +22,9 @@ createDelay().then(console.log); // Output after 2s: "Success!"
 // Fetch data from JSONPlaceholder (a fake API)
 async function fetchTodo() {
   try {
-    const response = await fetch('https://jsonplaceholder.typicode.com/todos/1');
+    const response = await fetch(
+      "https://jsonplaceholder.typicode.com/todos/1"
+    );
     const data = await response.json();
     console.log(data);
   } catch (error) {
@@ -81,7 +71,7 @@ Convert legacy XHR code to a Promise-based function.
 function fetchWithXHR(url) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();
-    xhr.open('GET', url);
+    xhr.open("GET", url);
     xhr.onload = () => resolve(xhr.responseText);
     xhr.onerror = () => reject("Request failed");
     xhr.send();
@@ -89,11 +79,10 @@ function fetchWithXHR(url) {
 }
 
 // Usage
-fetchWithXHR('https://jsonplaceholder.typicode.com/posts/1')
+fetchWithXHR("https://jsonplaceholder.typicode.com/posts/1")
   .then(console.log) // Output: JSON data for post 1
   .catch(console.error);
 ```
-
 
 ### **2. Retry Mechanism for Failed Requests**
 
@@ -111,11 +100,10 @@ async function fetchWithRetry(url, retries = 3) {
 }
 
 // Usage (simulate a failing URL)
-fetchWithRetry('https://fake-api.example.com/data').catch(() => 
+fetchWithRetry("https://fake-api.example.com/data").catch(() =>
   console.log("All retries failed")
 );
 ```
-
 
 ### **3. Modular Task Manager**
 
@@ -132,7 +120,7 @@ export function listTasks() {
 }
 
 // app.js (main file)
-import { addTask, listTasks } from './taskManager.js';
+import { addTask, listTasks } from "./taskManager.js";
 
 addTask("Learn Promises");
 addTask("Practice Fetch API");
@@ -164,14 +152,19 @@ async function runPipeline(tasks) {
 
 // Example tasks
 const tasks = [
-  () => fetch('https://jsonplaceholder.typicode.com/posts/1').then(res => res.json()),
+  () =>
+    fetch("https://jsonplaceholder.typicode.com/posts/1").then((res) =>
+      res.json()
+    ),
   () => Promise.reject("Simulated error"),
-  () => fetch('https://jsonplaceholder.typicode.com/posts/2').then(res => res.json())
+  () =>
+    fetch("https://jsonplaceholder.typicode.com/posts/2").then((res) =>
+      res.json()
+    ),
 ];
 
 runPipeline(tasks).then(console.log); // Output: [post1, Pipeline failed...]
 ```
-
 
 ### **2. Version Control Simulator with Branches**
 
@@ -180,7 +173,7 @@ class AdvancedVersionControl {
   constructor() {
     this.commits = [];
     this.branches = { main: [] };
-    this.currentBranch = 'main';
+    this.currentBranch = "main";
   }
 
   commit(message) {
@@ -208,7 +201,6 @@ repo.commit("Add feature");
 console.log(repo.branches);
 ```
 
-
 ### **3. API Client with Caching**
 
 ```javascript
@@ -227,8 +219,9 @@ async function fetchWithCache(url) {
 }
 
 // Usage
-fetchWithCache('https://jsonplaceholder.typicode.com/posts/1')
-  .then(() => fetchWithCache('https://jsonplaceholder.typicode.com/posts/1')); // Uses cache
+fetchWithCache("https://jsonplaceholder.typicode.com/posts/1").then(() =>
+  fetchWithCache("https://jsonplaceholder.typicode.com/posts/1")
+); // Uses cache
 ```
 
 ---
@@ -240,4 +233,3 @@ fetchWithCache('https://jsonplaceholder.typicode.com/posts/1')
 3. Replace API URLs with real endpoints for testing.
 
 These exercises will help you master async workflows, modular code, and even simulate version control concepts in pure JavaScript! 🚀
-
